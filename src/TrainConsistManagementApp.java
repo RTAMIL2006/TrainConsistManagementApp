@@ -1,36 +1,47 @@
-import java.util.HashSet;
-import java.util.Set;
+import java.util.LinkedList;
 
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-
+        // Header
         System.out.println("=== Train Consist Management App ===");
         System.out.println("====================================");
 
-        Set<String> bogieIds = new HashSet<>();
+        // Initialize LinkedList
+        LinkedList<String> trainConsist = new LinkedList<>();
 
         System.out.println();
-        System.out.println("Adding bogie IDs...");
+        System.out.println("Adding bogies to the train...");
 
+        // Add bogies
+        trainConsist.add("Engine");
+        trainConsist.add("Sleeper");
+        trainConsist.add("AC");
+        trainConsist.add("Cargo");
+        trainConsist.add("Guard");
 
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-        bogieIds.add("BG103");
-        bogieIds.add("BG101");
-        bogieIds.add("BG102");
-
-
-        System.out.println("Bogie IDs entered (with duplicates): [BG101, BG102, BG103, BG101, BG102]");
-
-        System.out.println();
-        System.out.println("Unique Bogie IDs in the train:");
-
-        System.out.println(bogieIds);
+        // Display initial consist
+        System.out.println("Initial Train Consist : " + trainConsist);
 
         System.out.println();
-        System.out.println("Note: Duplicate IDs are automatically ignored.");
+        System.out.println("Inserting Pantry Car at position 2...");
+
+        // Insert at index 2
+        trainConsist.add(2, "Pantry");
+
+        System.out.println("After Insertion : " + trainConsist);
+
+        System.out.println();
+        System.out.println("Removing first and last bogie...");
+
+        // Remove first and last
+        trainConsist.removeFirst();
+        trainConsist.removeLast();
+
+        // Final consist
+        System.out.println("Final Train Consist : " + trainConsist);
+
         System.out.println();
         System.out.println("System ready for operations...");
     }
