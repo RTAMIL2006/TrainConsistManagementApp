@@ -1,47 +1,31 @@
 import java.util.*;
 
-
-class InvalidCapacityException extends Exception {
-    public InvalidCapacityException(String message) {
-        super(message);
-    }
-}
-
-
-class PassengerBogie {
-    String name;
-    int capacity;
-
-    public PassengerBogie(String name, int capacity) throws InvalidCapacityException {
-        if (capacity <= 0) {
-            throw new InvalidCapacityException("Capacity must be greater than zero");
-        }
-        this.name = name;
-        this.capacity = capacity;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public int getCapacity() {
-        return capacity;
-    }
-}
-
-
+// Main class (as required)
 public class TrainConsistManagementApp {
 
     public static void main(String[] args) {
 
-        try {
-            PassengerBogie b1 = new PassengerBogie("Sleeper", 72);
-            PassengerBogie b2 = new PassengerBogie("AC Chair", 0); // ❌ Invalid
+        // Step 1: Create ArrayList
+        ArrayList<String> passengerBogies = new ArrayList<>();
 
-            System.out.println("Bogies created successfully");
+        // Step 2: Add bogies
+        passengerBogies.add("Sleeper");
+        passengerBogies.add("AC Chair");
+        passengerBogies.add("First Class");
 
-        } catch (InvalidCapacityException e) {
-            System.out.println("Error: " + e.getMessage());
-        }
+        // Step 3: Display after insertion
+        System.out.println("Passenger Bogies after adding:");
+        System.out.println(passengerBogies);
+
+        // Step 4: Remove a bogie (AC Chair)
+        passengerBogies.remove("AC Chair");
+
+        // Step 5: Check existence
+        boolean exists = passengerBogies.contains("Sleeper");
+        System.out.println("Does Sleeper exist? " + exists);
+
+        // Step 6: Final list
+        System.out.println("Final Passenger Bogies:");
+        System.out.println(passengerBogies);
     }
 }
