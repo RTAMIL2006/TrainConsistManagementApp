@@ -1,7 +1,8 @@
-import java.util.*;
-import java.util.stream.*;
+import java.util.Scanner;
+import java.util.regex.Pattern;
+import java.util.regex.Matcher;
 
-// Bogie class
+// Bogie class (keep from previous UC - no change)
 class Bogie {
     String name;
     int capacity;
@@ -11,35 +12,49 @@ class Bogie {
         this.capacity = capacity;
     }
 
-    public String getName() {
-        return name;
-    }
-
     public int getCapacity() {
         return capacity;
-    }
-
-    public void display() {
-        System.out.println(name + " - Capacity: " + capacity);
     }
 }
 
 // Main class (as required)
 public class TrainConsistManagementApp {
+
+    // Validation methods
+    public static boolean isValidTrainID(String trainId) {
+        String regex = "TRN-\\d{4}";
+        return Pattern.matches(regex, trainId);
+    }
+
+    public static boolean isValidCargoCode(String cargoCode) {
+        String regex = "PET-[A-Z]{2}";
+        return Pattern.matches(regex, cargoCode);
+    }
+
     public static void main(String[] args) {
 
-        // Step 1: Create list
-        List<Bogie> bogieList = new ArrayList<>();
-        bogieList.add(new Bogie("Sleeper", 72));
-        bogieList.add(new Bogie("AC Chair", 56));
-        bogieList.add(new Bogie("First Class", 24));
+        Scanner sc = new Scanner(System.in);
 
-        // Step 2: Calculate total capacity using Stream
-        int totalSeats = bogieList.stream()
-                .map(b -> b.getCapacity())      // extract capacity
-                .reduce(0, Integer::sum);       // sum
+        // Input
+        System.out.print("Enter Train ID: ");
+        String trainId = sc.nextLine();
 
-        // Step 3: Display result
-        System.out.println("Total Seating Capacity: " + totalSeats);
+        System.out.print("Enter Cargo Code: ");
+        String cargoCode = sc.nextLine();
+
+        // Validation
+        if (isValidTrainID(trainId)) {
+            System.out.println("Valid Train ID");
+        } else {
+            System.out.println("Invalid Train ID");
+        }
+
+        if (isValidCargoCode(cargoCode)) {
+            System.out.println("Valid Cargo Code");
+        } else {
+            System.out.println("Invalid Cargo Code");
+        }
+
+        sc.close();
     }
 }
