@@ -1,60 +1,49 @@
-import java.util.Scanner;
-import java.util.regex.Pattern;
-import java.util.regex.Matcher;
+import java.util.*;
+import java.util.stream.*;
 
-// Bogie class (keep from previous UC - no change)
-class Bogie {
-    String name;
-    int capacity;
+// GoodsBogie class
+class GoodsBogie {
+    String type;   // Cylindrical, Open, Box
+    String cargo;  // Petroleum, Coal, Grain
 
-    public Bogie(String name, int capacity) {
-        this.name = name;
-        this.capacity = capacity;
+    public GoodsBogie(String type, String cargo) {
+        this.type = type;
+        this.cargo = cargo;
     }
 
-    public int getCapacity() {
-        return capacity;
+    public String getType() {
+        return type;
+    }
+
+    public String getCargo() {
+        return cargo;
     }
 }
 
 // Main class (as required)
 public class TrainConsistManagementApp {
 
-    // Validation methods
-    public static boolean isValidTrainID(String trainId) {
-        String regex = "TRN-\\d{4}";
-        return Pattern.matches(regex, trainId);
-    }
-
-    public static boolean isValidCargoCode(String cargoCode) {
-        String regex = "PET-[A-Z]{2}";
-        return Pattern.matches(regex, cargoCode);
-    }
-
     public static void main(String[] args) {
 
-        Scanner sc = new Scanner(System.in);
+        // Step 1: Create goods bogies
+        List<GoodsBogie> bogies = Arrays.asList(
+                new GoodsBogie("Cylindrical", "Petroleum"),
+                new GoodsBogie("Open", "Coal"),
+                new GoodsBogie("Box", "Grain")
+        );
 
-        // Input
-        System.out.print("Enter Train ID: ");
-        String trainId = sc.nextLine();
+        // Step 2: Safety validation using allMatch()
+        boolean isSafe = bogies.stream()
+                .allMatch(b ->
+                        !b.getType().equalsIgnoreCase("Cylindrical") ||
+                                b.getCargo().equalsIgnoreCase("Petroleum")
+                );
 
-        System.out.print("Enter Cargo Code: ");
-        String cargoCode = sc.nextLine();
-
-        // Validation
-        if (isValidTrainID(trainId)) {
-            System.out.println("Valid Train ID");
+        // Step 3: Display result
+        if (isSafe) {
+            System.out.println("Train is SAFE for operation");
         } else {
-            System.out.println("Invalid Train ID");
+            System.out.println("Train is NOT SAFE");
         }
-
-        if (isValidCargoCode(cargoCode)) {
-            System.out.println("Valid Cargo Code");
-        } else {
-            System.out.println("Invalid Cargo Code");
-        }
-
-        sc.close();
     }
 }
