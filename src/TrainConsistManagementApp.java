@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import java.util.*;
 
 // Main class (as required)
@@ -29,3 +30,5 @@ public class TrainConsistManagementApp {
         System.out.println(passengerBogies);
     }
 }
+=======
+>>>>>>> f7e219f (Base application setup)
