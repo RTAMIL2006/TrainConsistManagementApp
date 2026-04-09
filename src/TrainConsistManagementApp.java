@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class TrainConsistManagementApp {
 
     static class CargoSafetyException extends RuntimeException {
@@ -66,6 +68,13 @@ public class TrainConsistManagementApp {
         }
     }
 
+    static class BogieNameSorter {
+
+        public static void sortNames(String[] names) {
+            Arrays.sort(names);
+        }
+    }
+
     public static void main(String[] args) {
 
         GoodsBogie rectangularBogie = new GoodsBogie("Rectangular");
@@ -77,13 +86,23 @@ public class TrainConsistManagementApp {
 
         int[] capacities = {72, 56, 24, 70, 60};
 
-        System.out.println("Before Sorting:");
+        System.out.println("Before Sorting Capacities:");
         PassengerBogieSorter.display(capacities);
 
         PassengerBogieSorter.bubbleSort(capacities);
 
-        System.out.println("After Sorting:");
+        System.out.println("After Sorting Capacities:");
         PassengerBogieSorter.display(capacities);
+
+        String[] bogieNames = {"Sleeper","AC Chair","First Class","General","Luxury"};
+
+        System.out.println("Before Sorting Names:");
+        System.out.println(Arrays.toString(bogieNames));
+
+        BogieNameSorter.sortNames(bogieNames);
+
+        System.out.println("After Sorting Names:");
+        System.out.println(Arrays.toString(bogieNames));
 
         System.out.println("Program continues safely after all operations.");
     }
