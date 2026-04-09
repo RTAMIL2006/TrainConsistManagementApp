@@ -1,34 +1,56 @@
-<<<<<<< HEAD
-import java.util.*;
-
-// Main class (as required)
 public class TrainConsistManagementApp {
+
+    static class CargoSafetyException extends RuntimeException {
+        public CargoSafetyException(String message) {
+            super(message);
+        }
+    }
+
+    static class GoodsBogie {
+        private String shape;
+        private String cargoType;
+
+        public GoodsBogie(String shape) {
+            this.shape = shape;
+        }
+
+        public void assignCargo(String cargo) {
+            try {
+                System.out.println("Attempting to assign cargo: " + cargo);
+
+                if (shape.equalsIgnoreCase("Rectangular") &&
+                        cargo.equalsIgnoreCase("Petroleum")) {
+
+                    throw new CargoSafetyException(
+                            "Unsafe: Petroleum cannot be assigned to Rectangular bogie!"
+                    );
+                }
+
+                this.cargoType = cargo;
+                System.out.println("Cargo assigned successfully: " + cargo);
+
+            } catch (CargoSafetyException e) {
+                System.out.println("ERROR: " + e.getMessage());
+
+            } finally {
+                System.out.println("Cargo assignment process completed.\n");
+            }
+        }
+
+        public String getCargoType() {
+            return cargoType;
+        }
+    }
 
     public static void main(String[] args) {
 
-        // Step 1: Create ArrayList
-        ArrayList<String> passengerBogies = new ArrayList<>();
+        GoodsBogie rectangularBogie = new GoodsBogie("Rectangular");
+        GoodsBogie cylindricalBogie = new GoodsBogie("Cylindrical");
 
-        // Step 2: Add bogies
-        passengerBogies.add("Sleeper");
-        passengerBogies.add("AC Chair");
-        passengerBogies.add("First Class");
+        cylindricalBogie.assignCargo("Petroleum");
+        rectangularBogie.assignCargo("Petroleum");
+        rectangularBogie.assignCargo("Coal");
 
-        // Step 3: Display after insertion
-        System.out.println("Passenger Bogies after adding:");
-        System.out.println(passengerBogies);
-
-        // Step 4: Remove a bogie (AC Chair)
-        passengerBogies.remove("AC Chair");
-
-        // Step 5: Check existence
-        boolean exists = passengerBogies.contains("Sleeper");
-        System.out.println("Does Sleeper exist? " + exists);
-
-        // Step 6: Final list
-        System.out.println("Final Passenger Bogies:");
-        System.out.println(passengerBogies);
+        System.out.println("Program continues safely after exception handling.");
     }
 }
-=======
->>>>>>> f7e219f (Base application setup)
