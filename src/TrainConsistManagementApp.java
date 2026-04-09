@@ -83,6 +83,31 @@ public class TrainConsistManagementApp {
             }
             return false;
         }
+
+        public static boolean binarySearch(String[] ids, String key) {
+            if (ids.length == 0) return false;
+
+            Arrays.sort(ids);
+
+            int low = 0;
+            int high = ids.length - 1;
+
+            while (low <= high) {
+                int mid = (low + high) / 2;
+
+                int cmp = key.compareTo(ids[mid]);
+
+                if (cmp == 0) {
+                    return true;
+                } else if (cmp < 0) {
+                    high = mid - 1;
+                } else {
+                    low = mid + 1;
+                }
+            }
+
+            return false;
+        }
     }
 
     public static void main(String[] args) {
@@ -117,13 +142,11 @@ public class TrainConsistManagementApp {
         String[] bogieIds = {"BG101","BG205","BG309","BG412","BG550"};
         String searchKey = "BG309";
 
-        boolean found = BogieSearch.linearSearch(bogieIds, searchKey);
+        boolean foundLinear = BogieSearch.linearSearch(bogieIds, searchKey);
+        boolean foundBinary = BogieSearch.binarySearch(bogieIds, searchKey);
 
-        if (found) {
-            System.out.println("Bogie ID " + searchKey + " found.");
-        } else {
-            System.out.println("Bogie ID " + searchKey + " not found.");
-        }
+        System.out.println("Linear Search Result: " + foundLinear);
+        System.out.println("Binary Search Result: " + foundBinary);
 
         System.out.println("Program continues safely after all operations.");
     }
