@@ -45,7 +45,6 @@ public class TrainConsistManagementApp {
     }
 
     static class PassengerBogieSorter {
-
         public static void bubbleSort(int[] arr) {
             int n = arr.length;
 
@@ -69,9 +68,20 @@ public class TrainConsistManagementApp {
     }
 
     static class BogieNameSorter {
-
         public static void sortNames(String[] names) {
             Arrays.sort(names);
+        }
+    }
+
+    static class BogieSearch {
+
+        public static boolean linearSearch(String[] ids, String key) {
+            for (String id : ids) {
+                if (id.equals(key)) {
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
@@ -103,6 +113,17 @@ public class TrainConsistManagementApp {
 
         System.out.println("After Sorting Names:");
         System.out.println(Arrays.toString(bogieNames));
+
+        String[] bogieIds = {"BG101","BG205","BG309","BG412","BG550"};
+        String searchKey = "BG309";
+
+        boolean found = BogieSearch.linearSearch(bogieIds, searchKey);
+
+        if (found) {
+            System.out.println("Bogie ID " + searchKey + " found.");
+        } else {
+            System.out.println("Bogie ID " + searchKey + " not found.");
+        }
 
         System.out.println("Program continues safely after all operations.");
     }
