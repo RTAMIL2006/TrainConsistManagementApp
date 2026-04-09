@@ -76,6 +76,7 @@ public class TrainConsistManagementApp {
     static class BogieSearch {
 
         public static boolean linearSearch(String[] ids, String key) {
+            validate(ids);
             for (String id : ids) {
                 if (id.equals(key)) {
                     return true;
@@ -85,7 +86,7 @@ public class TrainConsistManagementApp {
         }
 
         public static boolean binarySearch(String[] ids, String key) {
-            if (ids.length == 0) return false;
+            validate(ids);
 
             Arrays.sort(ids);
 
@@ -107,6 +108,12 @@ public class TrainConsistManagementApp {
             }
 
             return false;
+        }
+
+        private static void validate(String[] ids) {
+            if (ids == null || ids.length == 0) {
+                throw new IllegalStateException("No bogies available for search.");
+            }
         }
     }
 
@@ -142,11 +149,20 @@ public class TrainConsistManagementApp {
         String[] bogieIds = {"BG101","BG205","BG309","BG412","BG550"};
         String searchKey = "BG309";
 
-        boolean foundLinear = BogieSearch.linearSearch(bogieIds, searchKey);
-        boolean foundBinary = BogieSearch.binarySearch(bogieIds, searchKey);
+        try {
+            boolean found = BogieSearch.binarySearch(bogieIds, searchKey);
+            System.out.println("Search Result: " + found);
+        } catch (IllegalStateException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
 
-        System.out.println("Linear Search Result: " + foundLinear);
-        System.out.println("Binary Search Result: " + foundBinary);
+        String[] emptyIds = {};
+
+        try {
+            BogieSearch.linearSearch(emptyIds, "BG101");
+        } catch (IllegalStateException e) {
+            System.out.println("ERROR: " + e.getMessage());
+        }
 
         System.out.println("Program continues safely after all operations.");
     }
